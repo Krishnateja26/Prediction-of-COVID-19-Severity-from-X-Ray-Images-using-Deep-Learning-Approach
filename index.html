@@ -1,0 +1,207 @@
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.1/css/all.min.css"> 
+        <link rel="shortcut icon" href="#"> 
+        <title> 
+            COVID-19 TESTING 
+        </title> 
+        <style> 
+            :root { 
+                --color-primary: aqua; 
+                --color-white: #e9e9e9; 
+                --color-black: #141d28; 
+                --color-black-1: #212b38;
+            } 
+            * { 
+                margin: 0; 
+                padding: 0; 
+                box-sizing: border-box;
+            } 
+            body {   
+                font-family: sans-serif; 
+                margin-top: 60px; 
+            } 
+            .logo {  
+                color: var(--color-white); 
+                font-size: 25px; 
+                flex-shrink: 0; 
+                margin-left: 10px;
+            } 
+            .logo span { 
+                color: var(--color-primary); 
+            } 
+            .menu-bar { 
+                background-color: var(--color-black); 
+                height: 60px; 
+                width: 100%; 
+                position: fixed; 
+                left: 0; 
+                top: 0; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center;
+            } 
+            .menu-bar ul { 
+                list-style: none; 
+                display: flex;
+            } 
+            .menu-bar ul li { 
+                padding: 10px 30px; 
+                color: var(--color-white); 
+                position: relative;
+            } 
+            .menu-bar ul li a { 
+                font-size: 17px; 
+                color: var(--color-white); 
+                text-decoration: none; 
+                transition: all 0.3s;
+            } 
+            .menu-bar ul li a:hover { 
+                color: var(--color-primary);
+            } 
+            .fas { 
+                float: right; 
+                margin-left: 10px; 
+                padding-top: 3px;
+            } 
+            .ham { 
+                display: none; 
+                cursor: pointer;
+            } 
+            #mobile-heads { 
+                display: none; 
+            } 
+            @media (max-width: 900px) { 
+                .logo { 
+                    font-size: 25px; 
+                } 
+                .heads { 
+                    display: none; 
+                } 
+                .ham { 
+                    display: inline; 
+                    margin-right: 15px; 
+                } 
+                .bar { 
+                    display: block; 
+                    width: 30px; 
+                    height: 5px; 
+                    background-color: white; 
+                    margin-top: 6px; 
+                } 
+                #mobile-heads { 
+                    display: block; 
+                    position: fixed; 
+                    background-color: var(--color-black); 
+                    height: 100%; 
+                    width: 35%; 
+                    right: -35%; 
+                    top: 0; 
+                    overflow-x: hidden; 
+                    overflow-y: auto; 
+                } 
+                #mobile-heads.active { 
+                    right: 0; 
+                    transition: 0.5s; 
+                } 
+                #mobile-heads.inactive { 
+                    right: -35%; 
+                    transition: 0.5s; 
+                } 
+                .menu { 
+                    margin-top: 25px; 
+                    list-style: none; 
+                    display: block; 
+                } 
+                .menu-head { 
+                    margin-left: 10px; 
+                    color: rgb(62, 241, 247); 
+                    text-decoration: none; 
+                } 
+            } 
+        </style> 
+    </head> 
+    <body style="background-repeat:no-repeat; background-size:150%,125%; background-image:url(https://image.freepik.com/free-vector/realistic-coronavirus-background_23-2148497717.jpg)"> 
+        <div class="menu-bar"> 
+            <h1 class="logo">COVID-<span>DETECTION</span></h1> 
+            <div class="heads" id="heads"> 
+                <ul> 
+                    <li><a href="CoronaVirus.html">Corona Virus</a></li> 
+                    <li><a href="DeepLearning.html">Deep Learning</a></li> 
+                    <li><a href="About_us.html">About Us</a></li> 
+                </ul> 
+            </div> 
+            <div class="ham" onclick="displaymenu()" id="ham"> 
+                <div class="bar"></div> 
+                <div class="bar"></div> 
+                <div class="bar"></div> 
+            </div> 
+        </div> 
+        <div id="mobile-heads" class="inactive"> 
+            <ul class="menu"> 
+                <li><a href="CoronaVirus.html" class="menu-head">Corona Virus</a></li> 
+                <li><a href="DeepLearning.html" class="menu-head">Deep Learning</a></li> 
+                <li><a href="About_us.html" class="menu-head">About Us</a></li> 
+            </ul> 
+        </div> 
+        <br> 
+        <center>
+            <h1>COVID-19 TESTING USING XRAY IMAGES</h1>
+        </center>
+        <br> 
+        <center>
+            <h4>Enter the x-ray image in jpg format</h4><br> 
+            <input id="image-selector" type="file"><br><br> 
+            <button id="predict-button">Predict</button><br><br> 
+            <div> 
+                <p>PREDICTION: <span id="result">.....</span></p><br> 
+                <p>PROBABILITY: <span id="probability">.....</span></p><br> 
+            </div> 
+            <img id="selected-image" width="400px" src=""/> 
+            <br><br> 
+            <center>
+                <h4>Thank you for your visit to our website</h4>
+            </center>
+            <br><br> 
+        </center> 
+    </body> 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    <script> 
+        let base64Image;  
+        $("#image-selector").change(function(){ 
+            let reader = new FileReader(); 
+            reader.onload = function(e){ 
+                let dataURL = reader.result; 
+                $('#selected-image').attr("src", dataURL); 
+                base64Image = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""); 
+                console.log(base64Image); 
+            } 
+            reader.readAsDataURL($("#image-selector")[0].files[0]); 
+            $("#result").text(""); 
+            $("#probability").text(""); 
+        }); 
+        $("#predict-button").click(function(){ 
+            let message = { 
+                image: base64Image 
+            }; 
+            console.log(message); 
+            $.post("http://127.0.0.1:5000/predict", JSON.stringify(message), function(response){ 
+                $("#result").text(response.prediction.result); 
+                $("#probability").text(response.prediction.accuracy.toFixed(2)); 
+                console.log(response); 
+            }); 
+        }); 
+    </script> 
+    <script> 
+        function displaymenu() { 
+            document.getElementById("mobile-heads").className = "active"; 
+        } 
+        document.onclick = function fun(e) { 
+            if(e.target.id != 'mobile-heads' && e.target.id != 'ham' && e.target.className != 'menu-head' && e.target.className != 'bar') { 
+                document.getElementById('mobile-heads').className = 'inactive'; 
+            } 
+        } 
+    </script> 
+</html>
