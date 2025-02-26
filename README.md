@@ -1,5 +1,6 @@
 # Prediction-of-COVID-19-Severity-from-X-Ray-Images-using-Deep-Learning-Approach
 
+![Image](https://github.com/user-attachments/assets/7b322944-9203-4aa4-855a-bd6499ff11ee)
 ![Image](https://github.com/user-attachments/assets/76b35532-91f3-4a16-8a6e-b627260fa8ce)
 ![Image](https://github.com/user-attachments/assets/e2d13e17-c2c2-4837-b942-da1dad275c60)
 ![Image](https://github.com/user-attachments/assets/2e2ad1e3-29d9-4e5c-9190-15a1f9b24892)
